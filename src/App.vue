@@ -4,7 +4,8 @@
             <div class="container mx-auto px-4">
                 <div class="py-32 text-gray-200 text-center">
                     <h1 class="font-bold text-5xl">Tailwind Builder☄️</h1>
-                    <p class="mb-6 text-gray-400">Build a beautiful and elegant tailwind forms.</p>
+                    <p class="mb-1 text-gray-400">Build a beautiful and elegant tailwind forms.</p>
+                    <p class="mb-6 text-gray-500">Helps you to scaffold your forms structure without the need to repeat yourself</p>
                     <a href="https://github.com/Miaababikir/Tailwind-Builder"
                        class="px-4 py-2 bg-gray-300 text-gray-900 rounded inline-flex">
                         <svg class="fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><title>

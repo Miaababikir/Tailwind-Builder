@@ -6,7 +6,7 @@
                     <h2 class="text-gray-700 font-bold text-xl">Setup your form</h2>
                     <button class="px-3 py-2 bg-gray-800 text-white rounded" @click="addSection">+ Section</button>
                 </div>
-                <div class="flex mb-4 border-t border-gray-400 -mx-12 px-12 py-8" v-for="section in sections">
+                <div class="flex border-t border-gray-400 mb-4 -mx-12 px-12 py-8" v-for="section in sections">
                     <div class="w-1/4">
                         <input class="text-lg text-gray-700 focus:outline-none" v-model="section.title"/>
                     </div>
@@ -27,16 +27,31 @@
                 </div>
                 <div class="flex">
                     <button class="px-3 py-2 bg-gray-800 text-white rounded inline-flex items-center">
-                        <svg class="fill-current h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="heroicon-ui" d="M20.59 12l-3.3-3.3a1 1 0 1 1 1.42-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.42-1.4l3.3-3.3zM3.4 12l3.3 3.3a1 1 0 0 1-1.42 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.42 1.4L3.4 12zm7.56 8.24a1 1 0 0 1-1.94-.48l4-16a1 1 0 1 1 1.94.48l-4 16z"/></svg>
+                        <svg class="fill-current h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path class="heroicon-ui"
+                                  d="M20.59 12l-3.3-3.3a1 1 0 1 1 1.42-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.42-1.4l3.3-3.3zM3.4 12l3.3 3.3a1 1 0 0 1-1.42 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.42 1.4L3.4 12zm7.56 8.24a1 1 0 0 1-1.94-.48l4-16a1 1 0 1 1 1.94.48l-4 16z"/>
+                        </svg>
                         <span class="ml-2">Code</span>
                     </button>
                 </div>
             </div>
+
+            <div class="px-12 py-10 hidden">
+                <div>
+                    <pre><code class="px-12 py-8 rounded-md overflow-hidden">{{ testCode }}</code></pre>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
 
 <script>
+
+    import hljs from 'highlight.js/lib/highlight';
+
+    hljs.registerLanguage('html', require('highlight.js/lib/languages/xml'));
+    import 'highlight.js/styles/atom-one-dark.css';
 
     import TextField from "./InputTypes/Input";
     import Textarea from "./InputTypes/Textarea";
@@ -44,14 +59,15 @@
 
     export default {
         components: {
-            'v-input' : TextField,
-            'v-textarea' : Textarea,
-            'v-select' : Select,
+            'v-input': TextField,
+            'v-textarea': Textarea,
+            'v-select': Select,
         },
         data() {
             return {
                 sections: [],
-                inputType: 0
+                inputType: 0,
+                testCode: `<div class="text-2xl"></div>`,
             }
         },
         mounted() {
@@ -63,6 +79,10 @@
                         type: 'input'
                     }
                 ]
+            });
+
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
             });
         },
         filters: {
@@ -88,7 +108,8 @@
                     type: this.inputType
                 });
                 this.inputType = 0;
-            }
+            },
+            generateCode() {},
         }
     }
 </script>
