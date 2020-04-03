@@ -26,6 +26,11 @@
                 </div>
             </div>
         </main>
+        <footer class="bg-white">
+            <div class="px-8 py-6 text-gray-800 text-center">
+                <p>Built with <span class="text-red-600">❤️</span> @<a class="text-blue-600" href="https://twitter.com/miaababikir">Miaababikir</a> and @<a  class="text-blue-600" href="https://twitter.com/khatabwedaa">Khatab wedaa</a></p>
+            </div>
+        </footer>
     </div>
 </template>
 
