@@ -20,7 +20,7 @@
             <div class="py-24">
                 <div class="container px-4 mx-auto">
                     <div>
-                        <h2 class="text-gray-700 text-2xl font-bold mb-4">Form Builder</h2>
+                        <h2 class="text-gray-700 text-3xl font-bold mb-4">Form Builder</h2>
                         <builder/>
                     </div>
                 </div>
