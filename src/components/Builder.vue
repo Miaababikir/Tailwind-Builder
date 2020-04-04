@@ -71,23 +71,13 @@
                 this.sections = [];
                 this.sections.push({
                     title: 'Section title',
-                    fields: [
-                        {
-                            label: 'Field label',
-                            type: 'input'
-                        }
-                    ]
+                    fields: []
                 });
             },
             addSection() {
                 this.sections.push({
                     title: 'Section title',
-                    fields: [
-                        {
-                            label: 'Field label',
-                            type: 'input'
-                        }
-                    ]
+                    fields: []
                 })
             },
             addField(section) {

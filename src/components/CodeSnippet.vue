@@ -1,19 +1,12 @@
 <template>
     <div>
-        <button @click="generateCode()"
-                class="px-3 py-2 bg-gray-800 text-white rounded inline-flex items-center">
-            <svg class="fill-current h-5" viewBox="0 0 24 24">
-                <path d="M20.59 12l-3.3-3.3a1 1 0 1 1 1.42-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.42-1.4l3.3-3.3zM3.4 12l3.3 3.3a1 1 0 0 1-1.42 1.4l-4-4a1 1 0 0 1 0-1.4l4-4a1 1 0 0 1 1.42 1.4L3.4 12zm7.56 8.24a1 1 0 0 1-1.94-.48l4-16a1 1 0 1 1 1.94.48l-4 16z"/>
-            </svg>
-            <span class="ml-2">Code</span>
-        </button>
-        <div class="py-10" v-if="generatedCode">
+        <div class="py-10" v-if="code">
             <div class="relative rounded overflow-hidden">
                 <pre><code
-                        class="px-12 py-8 rounded-md overflow-x-scroll overflow-hidden">{{ generatedCode }}</code></pre>
+                        class="px-12 py-8 rounded-md overflow-x-scroll overflow-hidden">{{ code }}</code></pre>
                 <div class="absolute right-0 top-0">
                     <button class="px-3 py-2 text-gray-600 hover:text-gray-400 focus:outline-none"
-                            v-clipboard:copy="generatedCode">
+                            v-clipboard:copy="code">
                         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                              stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
                             <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
@@ -36,13 +29,22 @@
         props: ['data'],
         data() {
             return {
-                generatedCode: null
+                code: null
             }
         },
+        mounted() {
+            this.generate();
+        },
         watch: {
-            generatedCode() {
+            data: {
+                handler() {
+                    this.generate();
+                },
+                deep: true,
+            },
+            code() {
                 document.querySelectorAll('pre code').forEach((block) => {
-                    block.textContent = this.generatedCode;
+                    block.textContent = this.code;
                 });
             }
         },
@@ -54,7 +56,7 @@
                     });
                 });
             },
-            generateCode() {
+            generate() {
                 let code = '';
                 this.data.forEach(section => {
                     code += ''
@@ -81,15 +83,14 @@
 
                     });
                     code += '    </div>\n</div>\n';
+                });
 
-                    this.generatedCode = code;
+                this.code = code;
 
-                    this.highlightCode();
-
-                })
+                this.highlightCode();
             },
             onCopy() {
-              console.log('Copied!');
+                console.log('Copied!');
             },
         }
     }
